@@ -1,6 +1,7 @@
 package com.spoom.gear.config.security;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -24,10 +26,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @author spoomlan
  * @date 2019-03-29
  */
+@Component
 public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
-  private String tokenHeader = "Authorization";
-  private String tokenBegin = "Bearer ";
+  @Value("${jwt.header}")
+  private String tokenHeader;
+  @Value("${jwt.tokenBegin")
+  private String tokenBegin;
   private AuthenticationEntryPoint authenticationEntryPoint;
   private AuthenticationManager authenticationManager;
 
@@ -54,7 +59,7 @@ public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
     try {
       String token = header.substring(tokenBegin.length());
-      if(StringUtils.isBlank(token)){
+      if (StringUtils.isBlank(token)) {
         throw new InsufficientAuthenticationException("token is empty");
       }
       if (debug) {

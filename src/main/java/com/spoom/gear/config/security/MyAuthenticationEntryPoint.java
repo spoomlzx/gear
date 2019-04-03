@@ -23,7 +23,7 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
       AuthenticationException authException) throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
     response.getWriter()
-        .print("{\"code\": 501,\"认证出错，message\":\"" + authException.getMessage() + "\"}");
+        .print("{\"code\": 402,\"认证出错，message\":\"" + authException.getMessage() + "\"}");
     response.getWriter().flush();
   }
 }

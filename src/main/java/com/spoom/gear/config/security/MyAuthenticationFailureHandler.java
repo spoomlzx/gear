@@ -10,6 +10,7 @@ import java.io.IOException;
 
 /**
  * package com.spoom.gear.config
+ * authentication failure
  *
  * @author spoomlan
  * @date 2019-03-28
@@ -21,7 +22,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
       AuthenticationException exception) throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print("{\"code\":201,\"message\":\"" + exception.getMessage() + "\"}");
+    response.getWriter().print("{\"code\":401,\"message\":\"" + exception.getMessage() + "\"}");
     response.getWriter().flush();
   }
 }

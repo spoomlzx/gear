@@ -25,6 +25,13 @@ spring:
       max-request-size: 100MB
       enabled: true
 
+jwt:
+  header: Authorization
+  secret: mySecret
+  #token有效期一天
+  expiration: 86400
+  tokenBegin: "Bearer "
+
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml
   type-aliases-package: com.spoom.nymph.entity
