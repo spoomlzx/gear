@@ -1,6 +1,6 @@
 package com.spoom.gear.config;
 
-import com.spoom.gear.utils.BaseResult;
+import com.spoom.gear.utils.CommonResult;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.FieldError;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GearExceptionHandler {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public BaseResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+  public CommonResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
     StringBuilder errorMsg = new StringBuilder();
     List<FieldError> list = e.getBindingResult().getFieldErrors();
     for (FieldError error : list) {
       log.info("error: " + error.getDefaultMessage());
       errorMsg.append(error.getDefaultMessage()).append(".");
     }
-    return BaseResult.error(501, errorMsg.toString());
+    return new CommonResult().validateFailed(errorMsg.toString());
   }
 }

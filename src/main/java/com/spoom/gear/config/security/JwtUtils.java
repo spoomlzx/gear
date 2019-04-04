@@ -35,6 +35,11 @@ public class JwtUtils {
     return generate(subject, claims, expiration);
   }
 
+  /**
+   * get username from jwt token
+   * @param token
+   * @return
+   */
   public String getUsernameFromToken(String token) {
     String username;
     try {
@@ -78,6 +83,11 @@ public class JwtUtils {
         .compact();
   }
 
+  /**
+   * get exipre time from token
+   * @param token
+   * @return
+   */
   public Date getExpirationDateFromToken(String token) {
     Date expiration;
     try {

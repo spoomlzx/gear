@@ -1,7 +1,7 @@
 package com.spoom.gear.controller;
 
-import com.spoom.gear.utils.BaseResult;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.spoom.gear.model.User;
+import com.spoom.gear.utils.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 class UserController {
 
   @GetMapping("/user/info")
-  public BaseResult getUserInfo() {
-    return BaseResult.success().put("user", "spoom");
+  public CommonResult getUserInfo() {
+    return new CommonResult().success("spoom");
   }
 
   @GetMapping("/sys/info")
-  public BaseResult getUserInfo2() {
-    return BaseResult.success().put("user", "spoom");
+  public CommonResult getUserInfo2() {
+    return new CommonResult().success(new User());
   }
 }

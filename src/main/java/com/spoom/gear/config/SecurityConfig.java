@@ -1,6 +1,11 @@
 package com.spoom.gear.config;
 
-import com.spoom.gear.config.security.*;
+import com.spoom.gear.config.security.BearerAuthenticationFilter;
+import com.spoom.gear.config.security.BearerAuthenticationProvider;
+import com.spoom.gear.config.security.MyAccessDeniedHandler;
+import com.spoom.gear.config.security.MyAuthenticationEntryPoint;
+import com.spoom.gear.config.security.MyAuthenticationFailureHandler;
+import com.spoom.gear.config.security.MyAuthenticationSuccessHandler;
 import com.spoom.gear.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

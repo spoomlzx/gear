@@ -1,12 +1,12 @@
 package com.spoom.gear.config.security;
 
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-
+import com.spoom.gear.utils.CommonResult;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 /**
  * package com.spoom.gear.config
@@ -22,7 +22,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
       AuthenticationException exception) throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print("{\"code\":401,\"message\":\"" + exception.getMessage() + "\"}");
+    response.getWriter().print(new CommonResult().unauthenticated(exception.getMessage()));
     response.getWriter().flush();
   }
 }

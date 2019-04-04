@@ -1,12 +1,12 @@
 package com.spoom.gear.config.security;
 
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.access.AccessDeniedHandler;
-
+import com.spoom.gear.utils.CommonResult;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  * package com.spoom.gear.config
@@ -21,7 +21,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
   public void handle(HttpServletRequest request, HttpServletResponse response,
       AccessDeniedException accessDeniedException) throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print("{\"code\":403,\"message\":\"权限不足\"}");
+    response.getWriter().print(new CommonResult().unauthorized(accessDeniedException.getMessage()));
     response.getWriter().flush();
   }
 }

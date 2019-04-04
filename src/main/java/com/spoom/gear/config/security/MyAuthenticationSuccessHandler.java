@@ -1,12 +1,12 @@
 package com.spoom.gear.config.security;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
+import com.spoom.gear.utils.CommonResult;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * package com.spoom.gear.config
@@ -23,7 +23,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
   	//todo 如果认证成功，生成jwt token并返回
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print("{\"code\":200,\"message\":\"登录成功\"}");
+    response.getWriter().print(new CommonResult().success("login success"));
     response.getWriter().flush();
   }
 }
