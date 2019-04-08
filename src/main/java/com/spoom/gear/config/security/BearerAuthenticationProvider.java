@@ -8,9 +8,11 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,9 +42,13 @@ public class BearerAuthenticationProvider implements AuthenticationProvider {
     if (username == null) {
       throw new BadCredentialsException("token invalid");
     }
-    User user = userService.getOne(new QueryWrapper<User>().eq("username", username));
-    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
-    return auth;
+    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+    if (!jwtUtils.isTokenExpired(token)) {
+      return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),
+          userDetails.getPassword(), userDetails.getAuthorities());
+    } else {
+      throw new CredentialsExpiredException("token expired");
+    }
   }
 
   @Override

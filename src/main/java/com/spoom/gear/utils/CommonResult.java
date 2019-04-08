@@ -1,5 +1,7 @@
 package com.spoom.gear.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,6 +30,17 @@ public class CommonResult {
   private int code;
   private String message;
   private Object data;
+
+  private static final ObjectMapper MAPPER = new ObjectMapper();
+
+  public String toJson() {
+    try {
+      return MAPPER.writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
   /**
    * success

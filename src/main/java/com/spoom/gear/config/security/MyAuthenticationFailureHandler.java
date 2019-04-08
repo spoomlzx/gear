@@ -22,7 +22,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
       AuthenticationException exception) throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print(new CommonResult().unauthenticated(exception.getMessage()));
+    response.getWriter().print(new CommonResult().unauthenticated(exception.getMessage()).toJson());
     response.getWriter().flush();
   }
 }

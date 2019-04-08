@@ -22,7 +22,7 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
   public void commence(HttpServletRequest request, HttpServletResponse response,
       AuthenticationException authException) throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print(new CommonResult().unauthenticated(authException.getMessage()));
+    response.getWriter().print(new CommonResult().unauthenticated(authException.getMessage()).toJson());
     response.getWriter().flush();
   }
 }

@@ -29,8 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     if (StringUtils.isBlank(username)) {
       throw new BadCredentialsException("username is empty");
     }
-    User user = userService
-        .getOne(new QueryWrapper<User>().eq("username", username));
+    User user = userService.getOne(new QueryWrapper<User>().eq("username", username));
     if (null == user) {
       throw new BadCredentialsException("username not exist");
     }

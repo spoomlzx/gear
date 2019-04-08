@@ -26,7 +26,7 @@ public class BearerAuthenticationFilter extends OncePerRequestFilter {
 
   @Value("${jwt.header}")
   private String tokenHeader;
-  @Value("${jwt.tokenBegin")
+  @Value("${jwt.tokenBegin}")
   private String tokenBegin;
   private AuthenticationEntryPoint authenticationEntryPoint;
   private AuthenticationManager authenticationManager;
